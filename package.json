@@ -1,0 +1,20 @@
+{
+  "name": "coursehive",
+  "version": "1.0.0",
+  "description": "Centralized academic and competitive exam learning platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "ai-evaluator": "cd ai-evaluator && python -m uvicorn main:app --reload",
+    "scraper": "cd scraper && python main.py",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../ai-evaluator && pip install -r requirements.txt && cd ../scraper && pip install -r requirements.txt"
+  },
+  "keywords": ["education", "learning", "academic", "competitive-exams"],
+  "author": "CourseHive Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
