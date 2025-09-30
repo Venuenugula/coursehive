@@ -35,8 +35,7 @@ const subjectSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Index for efficient queries
-subjectSchema.index({ name: 1 });
+// Index for efficient queries (name index is already created by unique: true)
 subjectSchema.index({ isActive: 1 });
 
 module.exports = mongoose.model('Subject', subjectSchema);

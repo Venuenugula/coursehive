@@ -103,23 +103,23 @@ const Forum = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="p-6">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-200">
+          <div className="coursehive-card p-8">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                <h1 className="text-4xl font-bold text-charcoal mb-2">
                   Community Forum
                 </h1>
-                <p className="text-xl text-gray-600">
+                <p className="text-xl text-dark-gray">
                   Connect with fellow learners and share knowledge
                 </p>
               </div>
               <button
                 onClick={() => setShowCreateThread(true)}
-                className="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+                className="coursehive-button px-6 py-3 flex items-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <Plus className="h-5 w-5" />
                 <span>Start New Thread</span>
@@ -129,7 +129,7 @@ const Forum = () => {
         </div>
 
         {/* Search and Filter */}
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 border border-gray-200">
+        <div className="coursehive-card p-6 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -138,7 +138,7 @@ const Forum = () => {
                 placeholder="Search threads..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+                className="w-full pl-12 pr-4 py-4 border border-medium-gray rounded-xl focus:ring-2 focus:ring-coursehive-primary focus:border-coursehive-primary text-lg bg-pure-white"
               />
             </div>
             <div className="flex items-center space-x-2">
@@ -146,7 +146,7 @@ const Forum = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+                className="px-4 py-4 border border-medium-gray rounded-xl focus:ring-2 focus:ring-coursehive-primary focus:border-coursehive-primary text-lg bg-pure-white"
               >
                 {categories.map(category => (
                   <option key={category} value={category}>{category}</option>

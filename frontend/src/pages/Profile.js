@@ -105,20 +105,20 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200">
+    <div className="p-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="coursehive-card overflow-hidden">
           {/* Header */}
-          <div className="px-8 py-8 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <div className="px-8 py-8 border-b border-medium-gray bg-coursehive-light-blue">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-2">Profile Settings</h1>
-                <p className="text-gray-600">Manage your account information and preferences</p>
+                <h1 className="text-2xl font-semibold text-gray-900 mb-2">Profile Settings</h1>
+                <p className="text-dark-gray">Manage your account information and preferences</p>
               </div>
               {!isEditing ? (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                  className="coursehive-button px-4 py-2 flex items-center space-x-2"
                 >
                   <Edit3 className="h-4 w-4" />
                   <span>Edit Profile</span>
@@ -151,7 +151,7 @@ const Profile = () => {
               <div className="lg:col-span-1">
                 <div className="text-center">
                   <div className="relative inline-block">
-                    <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                    <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold">
                       {profile.name.charAt(0).toUpperCase()}
                     </div>
                     {isEditing && (
@@ -160,7 +160,7 @@ const Profile = () => {
                       </button>
                     )}
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mt-4">{profile.name}</h2>
+                  <h2 className="text-lg font-medium text-gray-900 mt-4">{profile.name}</h2>
                   <p className="text-gray-600">{profile.email}</p>
                   <div className="mt-4 flex items-center justify-center text-sm text-gray-500">
                     <Calendar className="h-4 w-4 mr-1" />
@@ -265,17 +265,17 @@ const Profile = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-blue-50 rounded-xl p-6 text-center">
                   <BookOpen className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                  <div className="text-2xl font-bold text-blue-900">0</div>
+                  <div className="text-xl font-semibold text-blue-900">0</div>
                   <div className="text-sm text-blue-700">Tests Completed</div>
                 </div>
                 <div className="bg-green-50 rounded-xl p-6 text-center">
                   <Clock className="h-8 w-8 text-green-600 mx-auto mb-3" />
-                  <div className="text-2xl font-bold text-green-900">0h</div>
+                  <div className="text-xl font-semibold text-green-900">0h</div>
                   <div className="text-sm text-green-700">Study Time</div>
                 </div>
                 <div className="bg-purple-50 rounded-xl p-6 text-center">
                   <Award className="h-8 w-8 text-purple-600 mx-auto mb-3" />
-                  <div className="text-2xl font-bold text-purple-900">0</div>
+                  <div className="text-xl font-semibold text-purple-900">0</div>
                   <div className="text-sm text-purple-700">Current Streak</div>
                 </div>
               </div>

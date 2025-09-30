@@ -1,0 +1,406 @@
+/* CourseHive Unique Aesthetic Color Palette */
+:root {
+  /* Primary Brand Colors - Unique & Modern */
+  --coursehive-primary: #2563EB;      /* Vibrant electric blue */
+  --coursehive-secondary: #7C3AED;    /* Rich purple */
+  --coursehive-accent: #059669;       /* Emerald green */
+  --coursehive-warm: #DC2626;         /* Warm red */
+  
+  /* Supporting Colors - Clean & Professional */
+  --coursehive-light-blue: #EFF6FF;   /* Very light blue background */
+  --coursehive-light-purple: #F3F4F6; /* Light purple background */
+  --coursehive-light-green: #F0FDF4;  /* Light green background */
+  --coursehive-light-red: #FEF2F2;    /* Light red background */
+  
+  /* Neutral Colors - Modern & Clean */
+  --pure-white: #FFFFFF;              /* Pure white */
+  --soft-white: #FAFAFA;              /* Soft white background */
+  --light-gray: #F8FAFC;              /* Light gray background */
+  --medium-gray: #E2E8F0;             /* Medium gray borders */
+  --dark-gray: #475569;               /* Dark gray text */
+  --charcoal: #1E293B;                /* Charcoal text */
+  
+  /* Status Colors - Clear & Distinct */
+  --success: #10B981;                 /* Success green */
+  --warning: #F59E0B;                 /* Warning amber */
+  --error: #EF4444;                   /* Error red */
+  --info: #3B82F6;                    /* Info blue */
+  
+}
+
+/* Tailwind CSS Custom Colors - New Brand Palette */
+.coursehive-primary { color: var(--coursehive-primary); }
+.coursehive-secondary { color: var(--coursehive-secondary); }
+.coursehive-accent { color: var(--coursehive-accent); }
+.coursehive-warm { color: var(--coursehive-warm); }
+
+.bg-coursehive-primary { background-color: var(--coursehive-primary); }
+.bg-coursehive-secondary { background-color: var(--coursehive-secondary); }
+.bg-coursehive-accent { background-color: var(--coursehive-accent); }
+.bg-coursehive-warm { background-color: var(--coursehive-warm); }
+
+.bg-coursehive-light-blue { background-color: var(--coursehive-light-blue); }
+.bg-coursehive-light-purple { background-color: var(--coursehive-light-purple); }
+.bg-coursehive-light-green { background-color: var(--coursehive-light-green); }
+.bg-coursehive-light-red { background-color: var(--coursehive-light-red); }
+
+.text-charcoal { color: var(--charcoal); }
+.text-dark-gray { color: var(--dark-gray); }
+.text-medium-gray { color: var(--medium-gray); }
+
+/* Border Colors */
+.border-coursehive-primary { border-color: var(--coursehive-primary); }
+.border-coursehive-secondary { border-color: var(--coursehive-secondary); }
+.border-coursehive-accent { border-color: var(--coursehive-accent); }
+.border-medium-gray { border-color: var(--medium-gray); }
+
+/* Hover Effects */
+.hover-coursehive-primary:hover { color: var(--coursehive-primary); }
+.hover-coursehive-secondary:hover { color: var(--coursehive-secondary); }
+.hover-coursehive-accent:hover { color: var(--coursehive-accent); }
+.hover-coursehive-warm:hover { color: var(--coursehive-warm); }
+
+.bg-hover-coursehive-primary:hover { background-color: var(--coursehive-primary); }
+.bg-hover-coursehive-secondary:hover { background-color: var(--coursehive-secondary); }
+.bg-hover-coursehive-accent:hover { background-color: var(--coursehive-accent); }
+.bg-hover-coursehive-warm:hover { background-color: var(--coursehive-warm); }
+
+/* Custom Component Styles - Clean & Modern */
+.coursehive-card {
+  background: var(--pure-white);
+  border: 1px solid var(--medium-gray);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+  transition: all 0.3s ease;
+}
+
+.coursehive-card:hover {
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+  border-color: var(--coursehive-primary);
+}
+
+.coursehive-button {
+  background: var(--coursehive-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.coursehive-button:hover {
+  background: #1D4ED8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.coursehive-button-secondary {
+  background: var(--coursehive-secondary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.coursehive-button-secondary:hover {
+  background: #6D28D9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.coursehive-navbar {
+  background: var(--pure-white);
+  border-bottom: 2px solid var(--medium-gray);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+}
+
+.coursehive-hero {
+  background: var(--coursehive-primary);
+  color: white;
+}
+
+.coursehive-section {
+  background: var(--coursehive-light-blue);
+}
+
+/* Enhanced Animation Classes */
+.honey-pulse {
+  animation: honeyPulse 2s infinite;
+}
+
+@keyframes honeyPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.slide-in-from-top-2 {
+  animation: slideInFromTop 0.3s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 0.5s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Smooth hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--light-gray);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--coursehive-primary);
+  border-radius: 3px;
+}
+
+/* Dark Theme Variables */
+.dark {
+  --coursehive-primary: #60A5FA;      /* Lighter blue for dark mode */
+  --coursehive-secondary: #A78BFA;    /* Lighter purple for dark mode */
+  --coursehive-accent: #34D399;       /* Lighter green for dark mode */
+  --coursehive-warm: #F87171;         /* Lighter red for dark mode */
+  
+  /* Dark mode backgrounds */
+  --coursehive-light-blue: #1E293B;   /* Dark blue background */
+  --coursehive-light-purple: #1E293B; /* Dark purple background */
+  --coursehive-light-green: #1E293B;  /* Dark green background */
+  --coursehive-light-red: #1E293B;    /* Dark red background */
+  
+  /* Dark mode neutrals */
+  --pure-white: #0F172A;              /* Dark background */
+  --soft-white: #1E293B;             /* Darker background */
+  --light-gray: #334155;             /* Dark gray background */
+  --medium-gray: #475569;            /* Dark gray borders */
+  --dark-gray: #E2E8F0;              /* Light gray text */
+  --charcoal: #F8FAFC;               /* Light text */
+  
+  /* Dark mode status colors */
+  --success: #34D399;                 /* Success green */
+  --warning: #FBBF24;                 /* Warning amber */
+  --error: #F87171;                   /* Error red */
+  --info: #60A5FA;                   /* Info blue */
+}
+
+/* Dark theme specific styles */
+.dark .coursehive-card {
+  background: var(--pure-white);
+  border-color: var(--medium-gray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .coursehive-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-color: var(--coursehive-primary);
+}
+
+.dark .coursehive-navbar {
+  background: var(--pure-white);
+  border-bottom-color: var(--medium-gray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .coursehive-section {
+  background: var(--coursehive-light-blue);
+}
+
+/* Dark mode text visibility fixes */
+.dark {
+  color: var(--charcoal);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: var(--charcoal);
+}
+
+.dark p, .dark span, .dark div {
+  color: var(--dark-gray);
+}
+
+.dark input, .dark textarea, .dark select {
+  background-color: var(--soft-white);
+  border-color: var(--medium-gray);
+  color: var(--charcoal);
+}
+
+.dark input:focus, .dark textarea:focus, .dark select:focus {
+  border-color: var(--coursehive-primary);
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.dark label {
+  color: var(--charcoal);
+}
+
+.dark button {
+  color: var(--charcoal);
+}
+
+.dark .coursehive-button {
+  background: var(--coursehive-primary);
+  color: white;
+}
+
+.dark .coursehive-button:hover {
+  background: #3B82F6;
+}
+
+.dark .coursehive-button-secondary {
+  background: var(--coursehive-secondary);
+  color: white;
+}
+
+.dark .coursehive-button-secondary:hover {
+  background: #8B5CF6;
+}
+
+/* Dark mode modal fixes */
+.dark .fixed {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dark .bg-white {
+  background-color: var(--pure-white);
+  color: var(--charcoal);
+}
+
+/* Dark mode form elements */
+.dark .border-medium-gray {
+  border-color: var(--medium-gray);
+}
+
+.dark .text-dark-gray {
+  color: var(--dark-gray);
+}
+
+.dark .text-charcoal {
+  color: var(--charcoal);
+}
+
+/* Dark theme scrollbar */
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--coursehive-primary);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--coursehive-secondary);
+}

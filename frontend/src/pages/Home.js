@@ -73,38 +73,49 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600/50 to-accent-600/50"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <div className="mb-8">
+              <img 
+                src="/logo.jpg" 
+                alt="CourseHive Logo" 
+                className="h-20 w-20 mx-auto rounded-2xl shadow-strong floating-animation"
+              />
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in">
               Master Your Exams with
-              <span className="block text-yellow-300">CourseHive</span>
+              <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                CourseHive
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-primary-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-10 text-blue-100 max-w-4xl mx-auto slide-up">
               Your centralized platform for academic and competitive exam preparation. 
               Access comprehensive study materials, practice tests, and AI-powered feedback.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center slide-up">
               {user ? (
                 <Link
                   to="/dashboard"
-                  className="btn btn-lg bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold"
+                  className="btn btn-lg btn-warning px-10 py-5 text-xl font-bold"
                 >
                   Go to Dashboard
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-3 h-6 w-6" />
                 </Link>
               ) : (
                 <>
                   <Link
                     to="/register"
-                    className="btn btn-lg bg-yellow-400 text-gray-900 hover:bg-yellow-300 px-8 py-4 text-lg font-semibold"
+                    className="btn btn-lg btn-warning px-10 py-5 text-xl font-bold"
                   >
                     Get Started Free
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-3 h-6 w-6" />
                   </Link>
                   <Link
                     to="/login"
-                    className="btn btn-lg border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 text-lg font-semibold"
+                    className="btn btn-lg btn-outline border-white text-white hover:bg-white hover:text-primary-600 px-10 py-5 text-xl font-bold"
                   >
                     Sign In
                   </Link>
@@ -150,14 +161,14 @@ const Home = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div key={index} className="card p-6 text-center hover:shadow-lg transition-shadow">
-                  <div className={`${feature.color} mb-4 flex justify-center`}>
-                    <Icon className="h-12 w-12" />
+                <div key={index} className="card-interactive p-8 text-center group">
+                  <div className={`${feature.color} mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className="h-16 w-16" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

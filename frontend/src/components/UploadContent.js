@@ -8,14 +8,12 @@ import {
   Image, 
   File, 
   X, 
-  CheckCircle,
-  AlertCircle,
   Loader2
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const UploadContent = ({ onClose }) => {
-  const { user } = useAuth();
+  const { token } = useAuth();
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     title: '',
@@ -89,7 +87,7 @@ const UploadContent = ({ onClose }) => {
     async (formDataToSend) => {
       const response = await axios.post('/api/content', formDataToSend, {
         headers: {
-          'Authorization': `Bearer ${user.token}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
         },
         onUploadProgress: (progressEvent) => {

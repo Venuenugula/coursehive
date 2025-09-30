@@ -20,7 +20,7 @@ const Recommendations = () => {
     setError(null);
     
     try {
-      const response = await fetch(`/api/links/recommendations/${user._id}`, {
+      const response = await fetch('/api/links/recommendations', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

@@ -5,6 +5,7 @@ const Attempt = require('../models/Attempt');
 const Analytics = require('../models/Analytics');
 const { auth, optionalAuth, adminAuth } = require('../middleware/auth');
 const axios = require('axios');
+const NotificationService = require('../services/notificationService');
 
 const router = express.Router();
 
@@ -20,13 +21,25 @@ router.get('/', optionalAuth, async (req, res) => {
       limit = 20, 
       search, 
       sortBy = 'createdAt',
-      sortOrder = 'desc'
+      sortOrder = 'desc',
+      viewType = 'all'
     } = req.query;
 
     // Build filter object
     const filter = {};
     if (subject) filter.subject = new RegExp(subject, 'i');
     if (isPublic !== 'false') filter.isPublic = true;
+    
+    // Apply view type filters
+    if (viewType === 'my' && req.user) {
+      // Get user's created tests
+      filter.createdBy = req.user._id;
+    } else if (viewType === 'history' && req.user) {
+      // Get tests the user has attempted
+      const attempts = await Attempt.find({ userId: req.user._id }).select('testId');
+      const testIds = attempts.map(attempt => attempt.testId);
+      filter._id = { $in: testIds };
+    }
     
     // Only show approved tests to regular users, admins can see all
     if (!req.user || req.user.role !== 'admin') {
@@ -127,6 +140,128 @@ router.get('/pending', adminAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Get pending tests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/tests/categories
+// @desc    Get test categories
+// @access  Public
+router.get('/categories', async (req, res) => {
+  try {
+    const categories = [
+      {
+        id: 'government-exams',
+        name: 'Government Exams',
+        description: 'UPSC, SSC, Banking, Railway, and other government competitive exams',
+        subjects: ['General Knowledge', 'Current Affairs', 'Quantitative Aptitude', 'English', 'Reasoning'],
+        icon: '🏛️'
+      },
+      {
+        id: 'programming',
+        name: 'Programming & Technology',
+        description: 'Software development, web development, and computer science',
+        subjects: ['JavaScript', 'Python', 'Java', 'C++', 'Data Structures', 'Algorithms', 'Web Development'],
+        icon: '💻'
+      },
+      {
+        id: 'engineering',
+        name: 'Engineering',
+        description: 'ECE, CSE, Mechanical, Civil, and other engineering disciplines',
+        subjects: ['Electronics', 'Computer Science', 'Mathematics', 'Physics', 'Chemistry'],
+        icon: '⚙️'
+      },
+      {
+        id: 'history',
+        name: 'History & Social Sciences',
+        description: 'World history, Indian history, geography, and social studies',
+        subjects: ['Ancient History', 'Medieval History', 'Modern History', 'World History', 'Geography'],
+        icon: '📚'
+      },
+      {
+        id: 'science',
+        name: 'Science & Mathematics',
+        description: 'Physics, Chemistry, Biology, and Mathematics',
+        subjects: ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'Statistics'],
+        icon: '🔬'
+      },
+      {
+        id: 'language',
+        name: 'Languages',
+        description: 'English, Hindi, and other language proficiency tests',
+        subjects: ['English Grammar', 'Hindi', 'Vocabulary', 'Comprehension', 'Literature'],
+        icon: '📝'
+      }
+    ];
+
+    res.json({ categories });
+  } catch (error) {
+    console.error('Get categories error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/tests/trending
+// @desc    Get trending tests
+// @access  Public
+router.get('/trending', async (req, res) => {
+  try {
+    const { limit = 10 } = req.query;
+    
+    const trendingTests = await Test.find({ 
+      isPublic: true, 
+      status: 'approved' 
+    })
+    .sort({ 'stats.totalAttempts': -1, 'stats.averageScore': -1 })
+    .limit(parseInt(limit))
+    .populate('createdBy', 'name email')
+    .select('title description subject duration totalMarks stats tags');
+
+    res.json({ tests: trendingTests });
+  } catch (error) {
+    console.error('Get trending tests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/tests/popular
+// @desc    Get popular tests by category
+// @access  Public
+router.get('/popular', async (req, res) => {
+  try {
+    const { category, limit = 5 } = req.query;
+    
+    const filter = { isPublic: true, status: 'approved' };
+    if (category) {
+      filter.subject = new RegExp(category, 'i');
+    }
+    
+    const popularTests = await Test.find(filter)
+      .sort({ 'stats.totalAttempts': -1 })
+      .limit(parseInt(limit))
+      .populate('createdBy', 'name email')
+      .select('title description subject duration totalMarks stats tags');
+
+    res.json({ tests: popularTests });
+  } catch (error) {
+    console.error('Get popular tests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/tests/history
+// @desc    Get user's test history
+// @access  Private
+router.get('/history', auth, async (req, res) => {
+  try {
+    const attempts = await Attempt.find({ userId: req.user._id })
+      .populate('testId', 'title description')
+      .sort({ createdAt: -1 })
+      .limit(50);
+
+    res.json({ attempts });
+  } catch (error) {
+    console.error('Get test history error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -322,6 +457,14 @@ router.post('/:id/submit', [
 
     // Update user analytics
     await updateUserAnalytics(req.user._id, test.subject, score, percentage, timeSpent);
+
+    // Send notification for test completion
+    await NotificationService.checkAndSendNotifications(req.user._id, 'test_completed', {
+      testName: test.name,
+      score,
+      percentage,
+      passed: percentage >= test.passingMarks
+    });
 
     // Send to AI evaluator for feedback
     try {

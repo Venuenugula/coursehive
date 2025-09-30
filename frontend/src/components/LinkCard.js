@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { ExternalLink, Heart, Star, Clock, Tag, Save, Bookmark } from 'lucide-react';
+import { ExternalLink, Star, Clock, Tag, Save, Bookmark } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const LinkCard = ({ link, onSave, onRate, onVisit }) => {
   const { user } = useAuth();
-  const [isSaved, setIsSaved] = useState(link.savedByUsers?.includes(user?._id) || false);
+  const [isSaved, setIsSaved] = useState(link.engagement?.bookmarks?.includes(user?._id) || false);
   const [userRating, setUserRating] = useState(
     link.userRatings?.find(r => r.user === user?._id)?.rating || 0
   );
@@ -57,9 +57,9 @@ const LinkCard = ({ link, onSave, onRate, onVisit }) => {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 group overflow-hidden">
+    <div className="card group overflow-hidden">
       {/* Header */}
-      <div className="p-6 border-b border-gray-100/50">
+      <div className="p-6 border-b border-gray-200">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <h3 className="text-xl font-bold text-gray-900 line-clamp-2 mb-3 group-hover:text-blue-600 transition-colors">
@@ -74,12 +74,12 @@ const LinkCard = ({ link, onSave, onRate, onVisit }) => {
               onClick={handleSave}
               className={`p-3 rounded-full transition-all duration-200 ${
                 isSaved 
-                  ? 'text-red-500 bg-red-50 hover:bg-red-100 shadow-md' 
-                  : 'text-gray-400 hover:text-red-500 hover:bg-red-50 hover:shadow-md'
+                  ? 'text-blue-500 bg-blue-50 hover:bg-blue-100 shadow-md' 
+                  : 'text-gray-400 hover:text-blue-500 hover:bg-blue-50 hover:shadow-md'
               }`}
-              title={isSaved ? 'Remove from saved' : 'Save link'}
+              title={isSaved ? 'Remove from bookmarks' : 'Bookmark link'}
             >
-              <Heart className={`h-5 w-5 ${isSaved ? 'fill-current' : ''}`} />
+              <Save className={`h-5 w-5 ${isSaved ? 'fill-current' : ''}`} />
             </button>
             <button
               onClick={handleVisit}
@@ -175,8 +175,8 @@ const LinkCard = ({ link, onSave, onRate, onVisit }) => {
               {link.clickCount || 0} clicks
             </span>
             <span className="flex items-center font-medium">
-              <Bookmark className="h-4 w-4 mr-2 text-red-500" />
-              {link.savedByUsers?.length || 0} saved
+              <Bookmark className="h-4 w-4 mr-2 text-blue-500" />
+              {link.engagement?.bookmarks?.length || 0} bookmarked
             </span>
           </div>
           <span className="text-gray-400 font-medium text-xs">

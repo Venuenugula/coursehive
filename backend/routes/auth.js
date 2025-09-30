@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { auth } = require('../middleware/auth');
+const NotificationService = require('../services/notificationService');
 
 const router = express.Router();
 
@@ -93,6 +94,11 @@ router.post('/login', [
     // Update last login
     user.lastLogin = new Date();
     await user.save();
+
+    // Send login notification
+    const loginTime = new Date().toLocaleString();
+    const location = req.ip || 'Unknown';
+    await NotificationService.sendLoginNotification(user._id, loginTime, location);
 
     // Generate token
     const token = generateToken(user._id);

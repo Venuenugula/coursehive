@@ -1,239 +1,447 @@
-# CourseHive - AI-Powered Learning Resource Aggregator
+# 🐝 CourseHive - AI-Powered Learning Platform
 
-A full-stack web application that aggregates and recommends learning resources from across the web, powered by OpenAI for intelligent categorization and personalized recommendations.
+CourseHive is a comprehensive, AI-enhanced learning platform that provides personalized educational resources, intelligent content curation, and interactive learning experiences. Built with a microservices architecture, it combines web scraping, AI analysis, and user personalization to create a powerful educational ecosystem.
 
-## 🚀 Features
+## 🌟 Key Features
 
-### Core Functionality
-- **Link Aggregation**: Scrapes and stores metadata from learning resources (no full content download)
-- **AI-Powered Categorization**: Uses OpenAI GPT models to automatically categorize resources by subject, topic, difficulty, and tags
-- **Personalized Recommendations**: Smart suggestions based on user interaction history
-- **Advanced Search & Filtering**: Search by title, description, tags, subject, topic, and difficulty
-- **User Interaction Tracking**: Click tracking, save functionality, and rating system
-- **Background Link Validation**: Automated job to validate links and update metrics
+### 🔗 Intelligent Link Management
+- **AI-Powered Categorization**: Automatically categorizes educational content using OpenAI
+- **Multi-language Support**: Detects and translates content from various languages
+- **Difficulty Classification**: Smart difficulty assessment (Beginner/Intermediate/Advanced)
+- **Content Validation**: Comprehensive link validation with safety checks
+- **Quality Scoring**: AI-based quality assessment and educational value rating
 
-### Technical Features
-- **Modern UI**: Beautiful, responsive design with gradient backgrounds and glassmorphism effects
-- **Real-time Updates**: Live search and filtering with React Query
-- **Authentication**: JWT-based user authentication with role-based access
-- **Database**: MongoDB with optimized schemas and indexing
-- **API**: RESTful API with comprehensive error handling
-- **Rate Limiting**: Built-in protection against abuse
-- **CORS Support**: Properly configured for frontend-backend communication
+### 🎯 Personalization & Recommendations
+- **Semantic Search**: AI-powered search using embeddings and natural language processing
+- **Personalized Feed**: Tailored content recommendations based on user behavior
+- **Skill Profiling**: Tracks user skills and learning progress
+- **Learning Paths**: Suggests structured learning journeys
+- **Trending Content**: Real-time trending analysis based on engagement
+
+### 🤖 AI Tutor Mode
+- **Interactive Q&A**: Ask questions and get intelligent responses
+- **Context-Aware**: Understands user's learning context and skill level
+- **Resource Suggestions**: Recommends relevant learning materials
+- **Follow-up Questions**: Generates thoughtful follow-up questions
+- **Learning Guidance**: Provides personalized learning suggestions
+
+### 📊 Advanced Analytics
+- **Performance Tracking**: Detailed analytics on learning progress
+- **Engagement Metrics**: Click tracking, time spent, and interaction analysis
+- **Skill Gap Analysis**: Identifies areas for improvement
+- **Learning Insights**: AI-generated insights and recommendations
+- **Progress Visualization**: Interactive charts and progress indicators
+
+### 🎮 Gamification
+- **Badge System**: Earn badges for learning achievements
+- **Streak Tracking**: Daily learning streaks and consistency rewards
+- **Leaderboards**: Compare progress with other learners
+- **Progress Tracking**: Visual progress indicators and milestones
+
+### 🔒 Security & Safety
+- **Safe Browsing**: Real-time Google Safe Browsing API integration for threat detection
+- **Virus Scanning**: VirusTotal API integration for comprehensive malware detection
+- **Content Moderation**: AI-powered content quality assessment
+- **User Feedback**: Community-driven content reporting system
+- **Multi-layer Security**: Combined threat detection from multiple security providers
+
+### 📚 Content Management
+- **Student Uploads**: Students can upload study materials (notes, papers, question banks, videos, articles, books)
+- **Mock Test Creation**: Students can create custom tests with multiple-choice questions
+- **Admin Approval**: All content and tests require admin approval before going live
+- **Submission Tracking**: View all submissions with approval status
+- **Learning Paths**: Create and manage structured learning journeys with progress tracking
 
 ## 🏗️ Architecture
 
-### Backend (Node.js + Express)
-- **Models**: User, Content, Test, Link, Subject, Topic, UserHistory, Analytics, AIFeedback
-- **Routes**: Authentication, Content Management, Link Management, Analytics, Admin
-- **Services**: OpenAI integration for content categorization
-- **Jobs**: Background link validation and metrics updates
-- **Middleware**: Authentication, validation, rate limiting, CORS
+### Microservices Design
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │  AI Evaluator   │
+│   (React)       │◄──►│   (Node.js)     │◄──►│   (FastAPI)     │
+│   Port: 3000    │    │   Port: 5001    │    │   Port: 5002    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Nginx         │    │   MongoDB       │    │   Redis Cache   │
+│   (Reverse      │    │   (Database)    │    │   (Caching)     │
+│    Proxy)       │    │                 │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│   Web Scraper   │
+│   (Python)      │
+│   Port: 5003    │
+└─────────────────┘
+```
 
-### Frontend (React.js)
-- **Pages**: Home, Dashboard, Links, Recommendations, Content, Tests, Admin
-- **Components**: Reusable UI components with modern design
-- **Context**: Authentication and state management
-- **Styling**: TailwindCSS with custom gradients and animations
-- **Icons**: Lucide React for consistent iconography
+### Technology Stack
 
-### Scraper (Python)
-- **Web Scraping**: BeautifulSoup for metadata extraction
-- **AI Integration**: OpenAI API for content categorization
-- **Batch Processing**: Handles multiple URLs efficiently
-- **Error Handling**: Robust error handling and retry logic
+#### Frontend
+- **React 18** with hooks and functional components
+- **React Query** for data fetching and caching
+- **React Router** for navigation
+- **TailwindCSS** for styling with custom design system
+- **Lucide React** for icons
+- **React Hot Toast** for notifications
 
-## 📦 Installation & Setup
+#### Backend
+- **Node.js** with Express.js framework
+- **MongoDB** with Mongoose ODM
+- **Redis** for caching and session management
+- **JWT** authentication with bcrypt password hashing
+- **Express Rate Limit** for API protection
+- **Helmet** for security headers
+- **CORS** for cross-origin requests
+
+#### AI Services
+- **FastAPI** for AI service endpoints
+- **OpenAI API** for content analysis and generation
+- **scikit-learn** for machine learning operations
+- **langdetect** for language detection
+- **googletrans** for translation services
+
+#### Web Scraping
+- **Python** with asyncio for concurrent scraping
+- **aiohttp** for async HTTP requests
+- **BeautifulSoup** for HTML parsing
+- **Rate limiting** and respectful scraping practices
+
+#### Infrastructure
+- **Docker** and Docker Compose for containerization
+- **Nginx** for reverse proxy and static file serving
+- **Redis** for caching and session storage
+- **MongoDB** for data persistence
+
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v16+)
-- Python (v3.8+)
-- MongoDB
-- OpenAI API Key
+- Node.js 18+ and npm
+- Python 3.8+
+- MongoDB 5.0+
+- Redis 6.0+ (Required for caching and performance)
+- Docker and Docker Compose (optional)
 
-### Backend Setup
+### Environment Setup
+
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd coursehive
+```
+
+2. **Backend Setup**
 ```bash
 cd backend
 npm install
 cp config.env.example config.env
 # Edit config.env with your settings
-npm start
+npm run dev
 ```
 
-### Frontend Setup
+3. **Frontend Setup**
 ```bash
 cd frontend
 npm install
 npm start
 ```
 
-### Scraper Setup
+4. **AI Evaluator Setup**
+```bash
+cd ai-evaluator
+pip install -r requirements.txt
+# Set OPENAI_API_KEY environment variable
+python main.py
+```
+
+5. **Web Scraper Setup**
 ```bash
 cd scraper
 pip install -r requirements.txt
-python3 link_scraper.py --help
+python enhanced_scraper.py
+```
+
+### Docker Setup (Recommended)
+
+```bash
+# Build and start all services
+docker-compose up --build
+
+# Start in background
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+## 📁 Project Structure
+
+```
+coursehive/
+├── frontend/                 # React frontend application
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── pages/          # Page components
+│   │   ├── contexts/       # React contexts
+│   │   ├── hooks/          # Custom hooks
+│   │   └── utils/          # Utility functions
+│   ├── public/             # Static assets
+│   └── package.json
+├── backend/                # Node.js backend API
+│   ├── models/            # MongoDB models
+│   ├── routes/            # API routes
+│   ├── middleware/        # Express middleware
+│   ├── services/          # Business logic services
+│   ├── scripts/           # Database seeding scripts
+│   └── server.js         # Main server file
+├── ai-evaluator/          # FastAPI AI service
+│   ├── main.py           # AI service endpoints
+│   └── requirements.txt  # Python dependencies
+├── scraper/              # Web scraping service
+│   ├── enhanced_scraper.py # Main scraper
+│   └── requirements.txt   # Python dependencies
+├── docker-compose.yml    # Docker orchestration
+└── README.md            # This file
 ```
 
 ## 🔧 Configuration
 
 ### Environment Variables
+
+#### Backend (`backend/config.env`)
 ```env
-# Backend
 NODE_ENV=development
 PORT=5001
 MONGODB_URI=mongodb://localhost:27017/coursehive
-JWT_SECRET=your_jwt_secret_key_here
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Frontend
-REACT_APP_API_URL=http://localhost:5001
+JWT_SECRET=your-jwt-secret
+JWT_EXPIRE=7d
+OPENAI_API_KEY=your-openai-api-key
+AI_SERVICE_URL=http://localhost:5002
+REDIS_URL=redis://localhost:6379
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASSWORD=your-app-password
+VAPID_PUBLIC_KEY=your-vapid-public-key
+VAPID_PRIVATE_KEY=your-vapid-private-key
 ```
 
-### OpenAI API Key
-1. Get your API key from [OpenAI Platform](https://platform.openai.com/)
-2. Add it to `backend/config.env`
-3. The system will automatically use it for content categorization
+#### AI Evaluator
+```env
+OPENAI_API_KEY=your-openai-api-key
+SAFE_BROWSING_API_KEY=your-safe-browsing-api-key
+VIRUS_TOTAL_API_KEY=your-virus-total-api-key
+```
 
-## 🎯 Usage
+### Email Setup
 
-### For Users
-1. **Register/Login**: Create an account or login
-2. **Browse Resources**: Explore the curated learning resources
-3. **Search & Filter**: Use advanced search and filtering options
-4. **Get Recommendations**: View personalized suggestions
-5. **Interact**: Click, save, and rate resources
+The application includes comprehensive email notifications for:
+- Password changes
+- Two-factor authentication setup/disable
+- Account deletion
+- Login notifications
 
-### For Administrators
-1. **Content Management**: Approve/reject user-submitted content
-2. **User Management**: Manage user accounts and roles
-3. **Analytics**: View system usage and performance metrics
-4. **Link Validation**: Trigger background validation jobs
+#### Gmail App Password Setup
+1. Go to your Google Account settings
+2. Navigate to Security → 2-Step Verification
+3. At the bottom, select "App passwords"
+4. Generate a new app password for "Mail"
+5. Use this password as `EMAIL_PASSWORD` in your config
 
-### For Developers
-1. **API Documentation**: All endpoints are documented in the code
-2. **Database Schema**: Well-structured MongoDB collections
-3. **Extensible Design**: Easy to add new features and integrations
+## 🎯 API Endpoints
 
-## 📊 Database Schema
+### Links API (`/api/links`)
+- `GET /` - Get paginated links with filtering and caching
+- `GET /trending` - Get trending links (cached)
+- `GET /recommendations` - Get personalized recommendations (cached)
+- `POST /search` - Semantic search
+- `GET /:id` - Get specific link
+- `POST /:id/click` - Track link click
+- `POST /:id/bookmark` - Bookmark/unbookmark link
+- `POST /:id/rate` - Rate link (1-5 stars)
+- `POST /:id/feedback` - Submit feedback
+- `GET /:id/similar` - Get similar links
+- `POST /tutor` - AI Tutor mode
 
-### Core Collections
-- **Users**: User accounts and profiles
-- **Links**: Learning resource metadata
-- **Subjects**: Subject categories
-- **Topics**: Topic categories within subjects
-- **UserHistory**: User interaction tracking
-- **Analytics**: Usage statistics and insights
+### Learning Paths API (`/api/learning-paths`)
+- `GET /` - Get all learning paths with filtering
+- `POST /` - Create new learning path
+- `GET /:id` - Get learning path details
+- `PUT /:id` - Update learning path
+- `DELETE /:id` - Delete learning path
+- `POST /:id/add-link` - Add link to path
+- `POST /:id/remove-link` - Remove link from path
+- `POST /:id/complete-link` - Mark link as completed
+- `GET /:id/progress` - Get path progress
 
-### Key Features
-- **Indexing**: Optimized for fast queries
-- **Relationships**: Proper foreign key relationships
-- **Validation**: Data validation at schema level
-- **Timestamps**: Automatic creation and update tracking
+### Content API (`/api/content`)
+- `GET /` - Get approved content
+- `POST /` - Upload new content (students)
+- `GET /my-submissions` - Get user's content submissions
+- `GET /pending` - Get pending content (admin)
+- `POST /:id/approve` - Approve content (admin)
+- `POST /:id/reject` - Reject content (admin)
 
-## 🔍 API Endpoints
+### Tests API (`/api/tests`)
+- `GET /` - Get approved tests
+- `POST /` - Create new test (students)
+- `GET /my-submissions` - Get user's test submissions
+- `GET /pending` - Get pending tests (admin)
+- `POST /:id/approve` - Approve test (admin)
+- `POST /:id/reject` - Reject test (admin)
+- `GET /:id` - Get specific test
+- `POST /:id/attempt` - Submit test attempt
 
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
-
-### Links
-- `GET /api/links` - Get learning resources
-- `POST /api/links` - Add new resource
-- `GET /api/links/subjects` - Get all subjects
-- `GET /api/links/topics` - Get topics by subject
-- `POST /api/links/:id/click` - Track click
-- `GET /api/links/recommendations/:userId` - Get recommendations
-
-### Content Management
-- `GET /api/content` - Get content
-- `POST /api/content` - Upload content
-- `GET /api/content/pending` - Get pending content (admin)
-- `POST /api/content/:id/approve` - Approve content (admin)
+### AI Services (`/api/ai-evaluator`)
+- `POST /analyze-link` - Comprehensive link analysis
+- `POST /validate-link` - Link validation and safety checks
+- `POST /personalized-recommendations` - Generate recommendations
+- `POST /tutor-mode` - AI Tutor interactions
+- `POST /semantic-search` - Semantic search with embeddings
 
 ## 🎨 UI/UX Features
 
-### Design Principles
-- **Modern Aesthetics**: Gradient backgrounds, glassmorphism effects
-- **Responsive Design**: Works on all device sizes
-- **Accessibility**: Proper contrast and keyboard navigation
-- **Performance**: Optimized loading and smooth animations
+### Design System
+- **Color Palette**: Vibrant, accessible color scheme
+- **Typography**: Inter font family for readability
+- **Animations**: Smooth transitions and micro-interactions
+- **Glassmorphism**: Modern glass-effect components
+- **Responsive Design**: Mobile-first approach
 
-### Key Components
-- **LinkCard**: Beautiful resource cards with metadata
-- **SearchBar**: Advanced search with real-time suggestions
-- **FilterPanel**: Multi-criteria filtering interface
-- **RecommendationEngine**: Personalized content suggestions
-- **AdminDashboard**: Comprehensive admin interface
+### Interactive Elements
+- **Floating AI Tutor**: Always-available learning assistant
+- **Smart Search**: AI-powered semantic search
+- **Personalized Feed**: Tailored content recommendations
+- **Progress Tracking**: Visual learning progress indicators
+- **Gamification**: Badges, streaks, and achievements
+
+## 🔒 Security Features
+
+- **Authentication**: JWT-based secure authentication
+- **Authorization**: Role-based access control
+- **Rate Limiting**: API protection against abuse
+- **Input Validation**: Comprehensive input sanitization
+- **CORS Protection**: Secure cross-origin requests
+- **Helmet Security**: Security headers implementation
+- **Safe Browsing**: Real-time Google Safe Browsing API integration
+- **Virus Scanning**: Comprehensive VirusTotal API integration
+
+## 📈 Performance Optimizations
+
+- **Redis Caching**: Comprehensive caching system for API responses, user sessions, and frequently accessed data
+- **Database Indexing**: Optimized MongoDB indexes for fast queries
+- **API Response Caching**: Intelligent caching of links, recommendations, and trending content
+- **Image Optimization**: Compressed and optimized assets
+- **Code Splitting**: Lazy loading for better performance
+- **CDN Ready**: Static asset optimization
+- **Pagination**: Efficient data loading
+- **Background Processing**: Async task processing
+
+## 🧪 Testing
+
+### Frontend Testing
+```bash
+cd frontend
+npm test                    # Run tests
+npm run test:coverage      # Coverage report
+npm run test:watch         # Watch mode
+```
+
+### Backend Testing
+```bash
+cd backend
+npm test                   # Run tests
+npm run test:coverage     # Coverage report
+```
+
+### AI Service Testing
+```bash
+cd ai-evaluator
+python -m pytest          # Run tests
+python -m pytest --cov   # Coverage report
+```
 
 ## 🚀 Deployment
 
-### Production Setup
-1. **Environment**: Set production environment variables
-2. **Database**: Use MongoDB Atlas or self-hosted MongoDB
-3. **Frontend**: Build and serve static files
-4. **Backend**: Use PM2 or similar process manager
-5. **Scraper**: Set up cron jobs for regular scraping
+### Production Deployment
 
-### Docker Support
-- `docker-compose.yml` for easy deployment
-- Individual Dockerfiles for each service
-- Environment variable configuration
+1. **Environment Setup**
+```bash
+# Set production environment variables
+export NODE_ENV=production
+export MONGODB_URI=mongodb://your-mongo-host:27017/coursehive
+export JWT_SECRET=your-production-jwt-secret
+export OPENAI_API_KEY=your-openai-api-key
+```
 
-## 🔧 Development
+2. **Docker Deployment**
+```bash
+# Build production images
+docker-compose -f docker-compose.prod.yml build
 
-### Adding New Features
-1. **Backend**: Add routes, models, and services
-2. **Frontend**: Create components and pages
-3. **Database**: Update schemas and migrations
-4. **Testing**: Add unit and integration tests
+# Deploy to production
+docker-compose -f docker-compose.prod.yml up -d
+```
 
-### Code Quality
-- **ESLint**: JavaScript linting
-- **Prettier**: Code formatting
-- **TypeScript**: Type safety (optional)
-- **Testing**: Jest and React Testing Library
+3. **Manual Deployment**
+```bash
+# Backend
+cd backend
+npm install --production
+npm run build
+npm start
 
-## 📈 Performance
+# Frontend
+cd frontend
+npm install --production
+npm run build
+# Serve build/ directory with nginx or similar
+```
 
-### Optimizations
-- **Database Indexing**: Optimized queries
-- **Caching**: React Query for data caching
-- **Lazy Loading**: Component and route lazy loading
-- **Image Optimization**: Optimized images and icons
-- **Bundle Splitting**: Code splitting for faster loading
+### Monitoring and Logging
 
-### Monitoring
-- **Error Tracking**: Comprehensive error logging
-- **Performance Metrics**: Response time monitoring
-- **User Analytics**: Usage pattern tracking
-- **Health Checks**: System health monitoring
+- **Application Logs**: Structured logging with Winston
+- **Error Tracking**: Comprehensive error handling
+- **Performance Monitoring**: Response time tracking
+- **Health Checks**: Service health monitoring
+- **Metrics Collection**: Usage analytics and metrics
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow ESLint and Prettier configurations
+- Write comprehensive tests for new features
+- Update documentation for API changes
+- Follow semantic versioning
+- Ensure accessibility compliance
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- **OpenAI**: For AI-powered content categorization
-- **React**: For the frontend framework
-- **Node.js**: For the backend runtime
-- **MongoDB**: For the database
-- **TailwindCSS**: For the styling framework
-- **Lucide**: For the beautiful icons
+- OpenAI for AI capabilities
+- MongoDB for database services
+- React team for the frontend framework
+- Node.js community for backend tools
+- All contributors and users
 
 ## 📞 Support
 
-For support, please open an issue in the GitHub repository or contact the development team.
+For support, email support@coursehive.com or join our community forum.
 
 ---
 
-**CourseHive** - Empowering learners with AI-driven resource discovery and personalized recommendations.
+**CourseHive** - Empowering learners with AI-driven educational experiences 🚀
