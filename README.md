@@ -437,10 +437,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - React team for the frontend framework
 - Node.js community for backend tools
 - All contributors and users
+##Authors
 
-## 📞 Support
-
-For support, email support@coursehive.com or join our community forum.
+-Venu Enugula (AI Engineer and Python Developer)
+-Shriya Vemula (Full stack Developer)
 
 ---
 
